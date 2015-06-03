@@ -1,77 +1,33 @@
 exports.largestPrimeFactor = function( n ) {
 
-  var isPrime = function( number ) {
+  var getLargestPrimeRefactor = function( number) {
 
-    if( number < 2 ) {
+    var denominator = 2;
+    var quotient = number;
 
-      return undefined;
-    };
+    if(number === 1 ) {
 
-    if(number === 2 || number === 3) {
-
-      return true;
+      return number;
     }
 
-    if(number%2===0) {
+    while(quotient !== denominator) {
 
-      return false;
-    };
+      if(quotient%denominator > 0) {
 
-    if(number%3===0) {
+        denominator++;
 
-      return false;
-    };
+      } else {
 
-    var sqrt = Math.sqrt(number);
+        quotient = quotient/denominator;
+      }
 
-    for( var i = 5; i <= sqrt; i+=2) {
+    }
 
-      if(number%i===0) {
+    console.log(number + " returns " + denominator);
 
-        return false;
-      };
-    };
-
-    return true;
-
+    return denominator;
   };
 
-  var getPrimeNumberCandidates = function( number ) {
-
-    //console.log("getPrimeNumberCandidates is processing : " + number);
-
-    if( number < 2 ) {
-
-      return undefined;
-    };
-
-    var primeFactorCandidates = [];
-
-    for(var i = 2; i<number; i++) {
-
-      if(isPrime(i)) {
-
-        primeFactorCandidates.push(i);
-      };
-    };
-
-    return primeFactorCandidates;
-  };
-
-  var primeCandidates = getPrimeNumberCandidates(n);
-
-  //console.log(primeCandidates);
-
-  var lastPrime = -1;
-
-  for(var i = 0;i<primeCandidates.length;i++) {
-
-    if(n%primeCandidates[i] === 0) {
-
-      lastPrime = primeCandidates[i];
-    };
-  };
-
-  return lastPrime;
+  return getLargestPrimeRefactor(n);
 
 };
